@@ -3,34 +3,27 @@ import getReservations from "../actions/getReservation";
 import EmptyState from "../components/EmptyState";
 import TripsClient from "./TripsClient";
 
-
 const TripsPage = async () => {
+  const currentUser = await getCurrenUser();
 
-    const currentUser = await getCurrenUser();
+  if (!currentUser) {
+    return <EmptyState title="Unauthorized" subtitle="Please Login" />;
+  }
 
+  const reservations = await getReservations({
+    userId: currentUser.id,
+  });
 
-    if (!currentUser) {
-        return (
-            <EmptyState title="Unauthorized" subtitle="Please Login" />
-        )
-    }
+  if (reservations.length === 0) {
+    return (
+      <EmptyState
+        title="No trips found"
+        subtitle="Looks like you haven't reserved any trips"
+      />
+    );
+  }
 
-    const reservations = await getReservations({
-        userId: currentUser.id
-    })
-
-    if (reservations.length === 0) {
-        return (
-            <EmptyState title="No trips found" subtitle="Looks like you haven't reserved any trips" />
-        )
-    }
-   
-    return(
-        <TripsClient
-        reservations={reservations}
-        currentUser={currentUser}/>
-    )
-
-}
+  return <TripsClient reservations={reservations} currentUser={currentUser} />;
+};
 
 export default TripsPage;

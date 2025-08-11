@@ -4,30 +4,28 @@ import EmptyState from "@/app/components/EmptyState";
 import ListingClient from "./ListingClient";
 import getReservations from "@/app/actions/getReservation";
 
-interface Iparams{
-    listingId?:string;
+interface Iparams {
+  listingId?: string;
 }
 
-const ListingPage = async({params}:{params:Iparams}) => {
+const ListingPage = async ({ params }: { params: Iparams }) => {
+  const listing = await getListingsById(params);
+  const currentUser = await getCurrenUser();
+  const reservations = await getReservations(params);
 
-    const listing = await getListingsById(params);
-    const currentUser = await getCurrenUser();
-    const reservations = await getReservations(params)
+  if (!listing) {
+    return <EmptyState />;
+  }
 
-    if(!listing){
-        return(
-            <EmptyState/>
-        )
-    }
-
-   
-    return (
-        <>
-        <ListingClient listing={listing} reservation={reservations} currentUser={currentUser}/>
-        
-        </>
-      
-    );
-}
+  return (
+    <>
+      <ListingClient
+        listing={listing}
+        reservation={reservations}
+        currentUser={currentUser}
+      />
+    </>
+  );
+};
 
 export default ListingPage;

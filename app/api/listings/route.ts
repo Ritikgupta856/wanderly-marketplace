@@ -29,10 +29,10 @@ export async function POST(request: Request) {
       guestCount,
       roomCount,
       bathroomCount,
-      locationValue:location.value,
+      locationValue: location.value,
       imageSrc,
-      price:parseInt(price,10),
-      userId:currentUser.id
+      price: parseInt(price, 10),
+      userId: currentUser.id,
     },
   });
 

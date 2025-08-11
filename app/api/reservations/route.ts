@@ -11,24 +11,23 @@ export async function POST(request: Request) {
   const body = await request.json();
   const { listingId, startDate, endDate, totalPrice } = body;
 
-
-  if(!listingId || !startDate || !endDate || !totalPrice){
+  if (!listingId || !startDate || !endDate || !totalPrice) {
     return NextResponse.error();
   }
 
   const listingAndReservation = await prisma.listing.update({
-    where:{
-        id:listingId
+    where: {
+      id: listingId,
     },
     data: {
-     reservations:{
-        create:{
-            userId:currentUser.id,
-            startDate,
-            endDate,
-            totalPrice
-        }
-     }
+      reservations: {
+        create: {
+          userId: currentUser.id,
+          startDate,
+          endDate,
+          totalPrice,
+        },
+      },
     },
   });
 
