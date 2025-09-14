@@ -13,7 +13,11 @@ const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Wanderly | Holiday rentals, cabins, beach houses & more",
-  description: "Online homestay booking website",
+  description: "Online homestay booking platform",
+
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default async function RootLayout({

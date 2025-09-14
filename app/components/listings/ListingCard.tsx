@@ -68,42 +68,51 @@ const ListingCard: React.FC<ListingCardProps> = ({
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full z-0">
-        <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+        {/* Image */}
+        <div className="aspect-square w-full relative overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
           <Image
             fill
             alt="listing"
             src={data.imageSrc}
-            className="object-cover h-full w-full group-hover:scale-110 transition"
+            className="object-cover h-full w-full group-hover:scale-105 transition-transform duration-300"
           />
-          <div className=" absolute top-3 right-3">
+          <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
 
-        <div className="font-semibold text-lg">
-          {location?.region},{location?.label}
+        {/* Location */}
+        <div className="font-semibold text-lg text-gray-900">
+          {location?.region}, {location?.label}
         </div>
 
-        <div className="font-light text-neutral-800">
+        {/* Category or Date */}
+        <div className="font-light text-neutral-600">
           {reservationDate || data.category}
         </div>
+
+        {/* Price */}
         <div className="flex flex-row items-center gap-1">
-          <div className="font-bold ">
-            &#8377; {price.toLocaleString("en-IN")}
+          <div className="font-bold text-gray-900">
+            ₹ {price.toLocaleString("en-IN")}
           </div>
-          {!reservation && <div className="font-light">night</div>}
+          {!reservation && <div className="font-light text-gray-600">night</div>}
         </div>
 
+        {/* Button */}
         {onAction && actionLabel && (
           <Button
             disabled={disabled}
             small
             label={actionLabel}
             onClick={handleCancel}
+            className="mt-1"
           />
         )}
       </div>
     </div>
+
+
   );
 };
 

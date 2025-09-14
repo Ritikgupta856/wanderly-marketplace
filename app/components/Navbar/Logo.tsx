@@ -10,9 +10,10 @@ const Logo = () => {
         onClick={() => router.push("/")}
         src="/images/logo.png"
         alt="logo"
-        width="140"
+        width="150"
         height="100"
       />
+      
     </div>
   );
 };
