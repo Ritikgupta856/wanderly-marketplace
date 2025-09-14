@@ -96,7 +96,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
           <div className="font-bold text-gray-900">
             ₹ {price.toLocaleString("en-IN")}
           </div>
-          {!reservation && <div className="font-light text-gray-600">night</div>}
+          {!reservation && (
+            <div className="font-light text-gray-600">night</div>
+          )}
         </div>
 
         {/* Button */}
@@ -106,13 +108,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
             small
             label={actionLabel}
             onClick={handleCancel}
-            className="mt-1"
           />
         )}
       </div>
     </div>
-
-
   );
 };
 
