@@ -1,7 +1,7 @@
-import getCurrenUser from "../actions/getCurrentUser";
-import getReservations from "../actions/getReservation";
-import EmptyState from "../components/EmptyState";
-import TripsClient from "./TripsClient";
+import getCurrenUser from '../actions/getCurrentUser';
+import getReservations from '../actions/getReservation';
+import EmptyState from '../components/EmptyState';
+import TripsClient from './TripsClient';
 
 const TripsPage = async () => {
   const currentUser = await getCurrenUser();
@@ -16,10 +16,7 @@ const TripsPage = async () => {
 
   if (reservations.length === 0) {
     return (
-      <EmptyState
-        title="No trips found"
-        subtitle="Looks like you haven't reserved any trips"
-      />
+      <EmptyState title="No trips found" subtitle="Looks like you haven't reserved any trips" />
     );
   }
 

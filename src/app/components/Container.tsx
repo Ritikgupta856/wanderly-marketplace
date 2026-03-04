@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-const Container = ({ children, className }: { children: React.ReactNode, className?: string }) => {
+const Container = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return (
-    <div className={`max-w-[2520px] mx-auto xl:px-16 md:px-12 sm:px-8 px-4 ${className}`}>
+    <div className={`mx-auto max-w-[2520px] px-4 sm:px-8 md:px-12 xl:px-16 ${className}`}>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Container
+export default Container;

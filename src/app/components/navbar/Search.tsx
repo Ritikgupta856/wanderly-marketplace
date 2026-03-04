@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { BiSearch } from "react-icons/bi";
+import { BiSearch } from 'react-icons/bi';
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation';
 
-import { useMemo } from "react";
-import { differenceInDays } from "date-fns";
-import useSearchModal from "@/app/hooks/useSearchModel";
-import useCountries from "@/app/hooks/useCountries";
+import { useMemo } from 'react';
+import { differenceInDays } from 'date-fns';
+import useSearchModal from '@/app/hooks/useSearchModel';
+import useCountries from '@/app/hooks/useCountries';
 
 const Search = () => {
   const searchModal = useSearchModal();
   const params = useSearchParams();
   const { getByValue } = useCountries();
-  const locationValue = params?.get("locationValue");
-  const startDate = params?.get("startDate");
-  const endDate = params?.get("endDate");
-  const guestCount = params?.get("guestCount");
+  const locationValue = params?.get('locationValue');
+  const startDate = params?.get('startDate');
+  const endDate = params?.get('endDate');
+  const guestCount = params?.get('guestCount');
 
   const locationLabel = useMemo(() => {
     if (locationValue) {
       return getByValue(locationValue as string)?.label;
     }
 
-    return "Anywhere";
+    return 'Anywhere';
   }, [getByValue, locationValue]);
 
   const durationLabel = useMemo(() => {
@@ -38,7 +38,7 @@ const Search = () => {
       return `${diff} Days`;
     }
 
-    return "Any week";
+    return 'Any week';
   }, [startDate, endDate]);
 
   const guestLabel = useMemo(() => {
@@ -46,22 +46,22 @@ const Search = () => {
       return `${guestCount} Guests`;
     }
 
-    return "Add Guests";
+    return 'Add Guests';
   }, [guestCount]);
 
   return (
     <div
       onClick={searchModal.onOpen}
-      className="border-[1px] w-full md:w-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointor"
+      className="cursor-pointor w-full rounded-full border-[1px] shadow-sm transition hover:shadow-md md:w-auto"
     >
       <div className="flex flex-row items-center justify-between">
-        <div className="text-sm font-semibold px-6">{locationLabel}</div>
-        <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
+        <div className="px-6 text-sm font-semibold">{locationLabel}</div>
+        <div className="hidden flex-1 border-x-[1px] px-6 text-center text-sm font-semibold sm:block">
           {durationLabel}
         </div>
-        <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
+        <div className="flex flex-row items-center gap-3 pl-6 pr-2 text-sm text-gray-600">
           <div className="hidden sm:block">{guestLabel}</div>
-          <div className="p-2 bg-rose-500 rounded-full text-white">
+          <div className="rounded-full bg-rose-500 p-2 text-white">
             <BiSearch size={18} />
           </div>
         </div>

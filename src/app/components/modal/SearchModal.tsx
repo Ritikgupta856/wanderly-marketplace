@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import Modal from "./modal";
-import { useCallback, useMemo, useState } from "react";
-import { Range } from "react-date-range";
-import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
-import qs from "query-string";
-import { formatISO } from "date-fns";
-import Heading from "../Heading";
-import Calendar from "../inputs/Calendar";
-import Counter from "../inputs/Counter";
-import useSearchModal from "@/app/hooks/useSearchModel";
+import Modal from './modal';
+import { useCallback, useMemo, useState } from 'react';
+import { Range } from 'react-date-range';
+import CountrySelect, { CountrySelectValue } from '../inputs/CountrySelect';
+import qs from 'query-string';
+import { formatISO } from 'date-fns';
+import Heading from '../Heading';
+import Calendar from '../inputs/Calendar';
+import Counter from '../inputs/Counter';
+import useSearchModal from '@/app/hooks/useSearchModel';
 
 enum STEPS {
   LOCATION = 0,
@@ -32,7 +32,7 @@ const SearchModal = () => {
   const [dateRange, setDateRange] = useState<Range>({
     startDate: new Date(),
     endDate: new Date(),
-    key: "selection",
+    key: 'selection',
   });
 
   const onBack = useCallback(() => {
@@ -70,10 +70,10 @@ const SearchModal = () => {
 
     const url = qs.stringifyUrl(
       {
-        url: "/",
+        url: '/',
         query: updatedQuery,
       },
-      { skipNull: true }
+      { skipNull: true },
     );
 
     setStep(STEPS.LOCATION);
@@ -94,10 +94,10 @@ const SearchModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.INFO) {
-      return "Search";
+      return 'Search';
     }
 
-    return "Next";
+    return 'Next';
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -105,15 +105,12 @@ const SearchModal = () => {
       return undefined;
     }
 
-    return "Back";
+    return 'Back';
   }, [step]);
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
-      <Heading
-        title="Where do you wanna go?"
-        subtitle="Find the perfect location"
-      />
+      <Heading title="Where do you wanna go?" subtitle="Find the perfect location" />
       <CountrySelect
         value={location}
         onChange={(value) => setLocation(value as CountrySelectValue)}
@@ -124,14 +121,8 @@ const SearchModal = () => {
   if (step === STEPS.DATE) {
     bodyContent = (
       <div className="flex flex-col gap-8">
-        <Heading
-          title="When do you plan to go?"
-          subtitle="Make sure everyone is free!"
-        />
-        <Calendar
-          value={dateRange}
-          onChange={(value) => setDateRange(value.selection)}
-        />
+        <Heading title="When do you plan to go?" subtitle="Make sure everyone is free!" />
+        <Calendar value={dateRange} onChange={(value) => setDateRange(value.selection)} />
       </div>
     );
   }

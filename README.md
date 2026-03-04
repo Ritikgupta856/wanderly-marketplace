@@ -22,9 +22,6 @@ This project is a responsive online homestay marketplace developed using Next.js
 - **Favorites System**: Implements a favorites system for users.
 - **POST and DELETE Routes in Route Handlers**: Demonstrates writing POST and DELETE routes in route handlers (app/api).
 
-
-
-
 ## Getting Started
 
 First, run the development server:

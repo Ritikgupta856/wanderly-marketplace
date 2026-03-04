@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { useCallback, useMemo } from "react";
-import { format } from "date-fns";
-import Image from "next/image";
-import Button from "../Button";
-import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
-import HeartButton from "../HeartButton";
-import useCountries from "@/app/hooks/useCountries";
+import { useCallback, useMemo } from 'react';
+import { format } from 'date-fns';
+import Image from 'next/image';
+import Button from '../Button';
+import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
+import HeartButton from '../HeartButton';
+import useCountries from '@/app/hooks/useCountries';
 
 interface ListingCardProps {
   data: SafeListing;
@@ -26,7 +26,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
   onAction,
   disabled,
   actionLabel,
-  actionId = "",
+  actionId = '',
   currentUser,
 }) => {
   const router = useRouter();
@@ -42,7 +42,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
       onAction?.(actionId);
     },
-    [onAction, actionId, disabled]
+    [onAction, actionId, disabled],
   );
 
   const price = useMemo(() => {
@@ -59,55 +59,44 @@ const ListingCard: React.FC<ListingCardProps> = ({
     const start = new Date(reservation.startDate);
     const end = new Date(reservation.endDate);
 
-    return `${format(start, "PP")} - ${format(end, "PP")}`;
+    return `${format(start, 'PP')} - ${format(end, 'PP')}`;
   }, [reservation]);
 
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
-      className="col-span-1 cursor-pointer group"
+      className="group col-span-1 cursor-pointer"
     >
-      <div className="flex flex-col gap-2 w-full z-0">
+      <div className="z-0 flex w-full flex-col gap-2">
         {/* Image */}
-        <div className="aspect-square w-full relative overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="relative aspect-square w-full overflow-hidden rounded-xl shadow-md transition-shadow duration-300 hover:shadow-lg">
           <Image
             fill
             alt="listing"
             src={data.imageSrc}
-            className="object-cover h-full w-full group-hover:scale-105 transition-transform duration-300"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute top-3 right-3">
+          <div className="absolute right-3 top-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
 
         {/* Location */}
-        <div className="text-base font-semibold text-gray-900 line-clamp-2 leading-snug">
+        <div className="line-clamp-2 text-base font-semibold leading-snug text-gray-900">
           {data.title}
         </div>
         {/* Category or Date */}
-        <div className="font-light text-neutral-600">
-          {reservationDate || data.category}
-        </div>
+        <div className="font-light text-neutral-600">{reservationDate || data.category}</div>
 
         {/* Price */}
         <div className="flex flex-row items-center gap-1">
-          <div className="font-bold text-gray-900">
-            ₹ {price.toLocaleString("en-IN")}
-          </div>
-          {!reservation && (
-            <div className="font-light text-gray-600">night</div>
-          )}
+          <div className="font-bold text-gray-900">₹ {price.toLocaleString('en-IN')}</div>
+          {!reservation && <div className="font-light text-gray-600">night</div>}
         </div>
 
         {/* Button */}
         {onAction && actionLabel && (
-          <Button
-            disabled={disabled}
-            small
-            label={actionLabel}
-            onClick={handleCancel}
-          />
+          <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />
         )}
       </div>
     </div>

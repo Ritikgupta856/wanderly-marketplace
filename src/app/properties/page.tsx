@@ -1,7 +1,7 @@
-import getCurrenUser from "../actions/getCurrentUser";
-import getListings from "../actions/getListing";
-import EmptyState from "../components/EmptyState";
-import PropertiesClient from "./PropertiesClient";
+import getCurrenUser from '../actions/getCurrentUser';
+import getListings from '../actions/getListing';
+import EmptyState from '../components/EmptyState';
+import PropertiesClient from './PropertiesClient';
 
 const PropertiesPage = async () => {
   const currentUser = await getCurrenUser();
@@ -15,12 +15,7 @@ const PropertiesPage = async () => {
   });
 
   if (listings.length === 0) {
-    return (
-      <EmptyState
-        title="No Properties found"
-        subtitle="Looks like you have no properties"
-      />
-    );
+    return <EmptyState title="No Properties found" subtitle="Looks like you have no properties" />;
   }
 
   return <PropertiesClient listings={listings} currentUser={currentUser} />;

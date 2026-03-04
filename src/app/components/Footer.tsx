@@ -1,22 +1,19 @@
-import Container from "./Container";
+import Container from './Container';
 
 const Footer = () => {
-    return (
-        <footer className="w-full border-t mt-16">
-            <Container className="flex flex-col md:flex-row items-center justify-between text-sm text-neutral-500 py-6 ">
-                <span>
-                    © {new Date().getFullYear()} Wanderly. All rights reserved.
-                </span>
+  return (
+    <footer className="mt-16 w-full border-t">
+      <Container className="flex flex-col items-center justify-between py-6 text-sm text-neutral-500 md:flex-row">
+        <span>© {new Date().getFullYear()} Wanderly. All rights reserved.</span>
 
-                <div className="mt-2 md:mt-0 flex items-center gap-6 text-neutral-600 cursor-pointer">
-                    <span>Privacy Policy</span>
-                    <span>Terms</span>
-                    <span>Cookies</span>
-                </div>
-
-            </Container>
-        </footer>
-    );
+        <div className="mt-2 flex cursor-pointer items-center gap-6 text-neutral-600 md:mt-0">
+          <span>Privacy Policy</span>
+          <span>Terms</span>
+          <span>Cookies</span>
+        </div>
+      </Container>
+    </footer>
+  );
 };
 
 export default Footer;

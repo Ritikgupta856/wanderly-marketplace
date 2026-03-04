@@ -1,4 +1,4 @@
-import prisma from "@/app/libs/prismadb";
+import prisma from '@/app/libs/prismadb';
 
 interface Iparams {
   listingId?: string;
@@ -26,7 +26,7 @@ export default async function getReservations(params: Iparams) {
         listing: true,
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     });
 

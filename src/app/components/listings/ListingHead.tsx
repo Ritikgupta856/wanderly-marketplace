@@ -1,6 +1,6 @@
-import useCountries from "@/app/hooks/useCountries";
-import Heading from "../Heading";
-import Image from "next/image";
+import useCountries from '@/app/hooks/useCountries';
+import Heading from '../Heading';
+import Image from 'next/image';
 
 interface ListingHeadProps {
   title: string;
@@ -8,27 +8,15 @@ interface ListingHeadProps {
   imageSrc: string;
 }
 
-const ListingHead: React.FC<ListingHeadProps> = ({
-  title,
-  locationValue,
-  imageSrc,
-}) => {
+const ListingHead: React.FC<ListingHeadProps> = ({ title, locationValue, imageSrc }) => {
   const { getByValue } = useCountries();
   const location = getByValue(locationValue);
   return (
     <>
-      <Heading
-        title={title}
-        subtitle={`${location?.region},${location?.label}`}
-      />
+      <Heading title={title} subtitle={`${location?.region},${location?.label}`} />
 
-      <div className="w-full h-[60vh] overflow-hidden rounded-xl relative z-0">
-        <Image
-          alt="image"
-          fill
-          src={imageSrc}
-          className="object-cover w-full"
-        />
+      <div className="relative z-0 h-[60vh] w-full overflow-hidden rounded-xl">
+        <Image alt="image" fill src={imageSrc} className="w-full object-cover" />
       </div>
     </>
   );

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Range } from "react-date-range";
-import Calendar from "../inputs/Calendar";
-import Button from "../Button";
+import { Range } from 'react-date-range';
+import Calendar from '../inputs/Calendar';
+import Button from '../Button';
 
 interface ListingReservationProps {
   price: number;
@@ -24,11 +24,9 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="bg-white rounded-xl border-[1px] overflow-hidden border-neutral-200">
+    <div className="overflow-hidden rounded-xl border-[1px] border-neutral-200 bg-white">
       <div className="flex flex-row items-center gap-1 p-4">
-        <div className="text-2xl font-semibold">
-          &#8377; {price.toLocaleString("en-IN")} /
-        </div>
+        <div className="text-2xl font-semibold">&#8377; {price.toLocaleString('en-IN')} /</div>
 
         <div className="font-light text-neutral-600">night</div>
       </div>
@@ -46,10 +44,10 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
         <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
       </div>
 
-      <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
+      <div className="flex flex-row items-center justify-between p-4 text-lg font-semibold">
         <div>Total</div>
 
-        <div>&#8377;{totalPrice?.toLocaleString("en-IN")}</div>
+        <div>&#8377;{totalPrice?.toLocaleString('en-IN')}</div>
       </div>
     </div>
   );

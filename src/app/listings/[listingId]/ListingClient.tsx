@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Container from "@/app/components/Container";
-import { categories } from "@/app/components/navbar/Categories";
+import Container from '@/app/components/Container';
+import { categories } from '@/app/components/navbar/Categories';
 
-import ListingHead from "@/app/components/listings/ListingHead";
-import ListingInfo from "@/app/components/listings/ListingInfo";
-import ListingReservation from "@/app/components/listings/ListingReservation";
-import useLoginModal from "@/app/hooks/useLoginModal";
-import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
-import axios from "axios";
-import { differenceInDays, eachDayOfInterval } from "date-fns";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Range } from "react-date-range";
-import toast from "react-hot-toast";
+import ListingHead from '@/app/components/listings/ListingHead';
+import ListingInfo from '@/app/components/listings/ListingInfo';
+import ListingReservation from '@/app/components/listings/ListingReservation';
+import useLoginModal from '@/app/hooks/useLoginModal';
+import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
+import axios from 'axios';
+import { differenceInDays, eachDayOfInterval } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Range } from 'react-date-range';
+import toast from 'react-hot-toast';
 
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
-  key: "selection",
+  key: 'selection',
 };
 
 interface ListingClientProps {
@@ -68,12 +68,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
         listingId: listing?.id,
       })
       .then(() => {
-        toast.success("Listing Reserved");
+        toast.success('Listing Reserved');
         setDateRange(initialDateRange);
-        router.push("/trips");
+        router.push('/trips');
       })
       .catch(() => {
-        toast.error("Something went wrong");
+        toast.error('Something went wrong');
       })
       .finally(() => {
         setIsLoading(false);
@@ -129,7 +129,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
           </div>
         </div>
       </div>
-    </Container >
+    </Container>
   );
 };
 

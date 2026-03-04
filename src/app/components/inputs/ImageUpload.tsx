@@ -1,8 +1,8 @@
-"use client";
-import { CldUploadWidget } from "next-cloudinary";
-import Image from "next/image";
-import { useCallback } from "react";
-import { TbPhotoPlus } from "react-icons/tb";
+'use client';
+import { CldUploadWidget } from 'next-cloudinary';
+import Image from 'next/image';
+import { useCallback } from 'react';
+import { TbPhotoPlus } from 'react-icons/tb';
 
 declare global {
   var cloudinary: any;
@@ -18,7 +18,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
     (result: any) => {
       onChange(result.info.secure_url);
     },
-    [onChange]
+    [onChange],
   );
 
   return (
@@ -33,19 +33,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
         return (
           <div
             onClick={() => open?.()}
-            className="relative cursor-pointer hover:opacity-70 transition border-2 p-20 border-neutral-300 flex flex-col items-center justify-center gap-4 text-neutral-600"
+            className="relative flex cursor-pointer flex-col items-center justify-center gap-4 border-2 border-neutral-300 p-20 text-neutral-600 transition hover:opacity-70"
           >
             <TbPhotoPlus size={50} />
             <div className="flex-semibold text-lg">Click to Upload</div>
 
             {value && (
-              <div className="absolute inset-0 w-full h-full">
-                <Image
-                  alt="Upload"
-                  fill
-                  style={{ objectFit: "cover" }}
-                  src={value}
-                />
+              <div className="absolute inset-0 h-full w-full">
+                <Image alt="Upload" fill style={{ objectFit: 'cover' }} src={value} />
               </div>
             )}
           </div>

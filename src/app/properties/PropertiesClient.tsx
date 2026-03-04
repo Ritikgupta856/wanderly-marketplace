@@ -1,26 +1,23 @@
-"use client";
-import { useRouter } from "next/navigation";
-import Container from "../components/Container";
+'use client';
+import { useRouter } from 'next/navigation';
+import Container from '../components/Container';
 
-import Heading from "../components/Heading";
-import { SafeListing, SafeUser } from "../types";
-import ListingCard from "../components/listings/ListingCard";
-import { useCallback, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import Heading from '../components/Heading';
+import { SafeListing, SafeUser } from '../types';
+import ListingCard from '../components/listings/ListingCard';
+import { useCallback, useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 interface PropertiesClientProps {
   listings: SafeListing[];
   currentUser?: SafeUser | null;
 }
 
-const PropertiesClient: React.FC<PropertiesClientProps> = ({
-  listings,
-  currentUser,
-}) => {
+const PropertiesClient: React.FC<PropertiesClientProps> = ({ listings, currentUser }) => {
   const router = useRouter();
 
-  const [deletingId, setDeletingId] = useState("");
+  const [deletingId, setDeletingId] = useState('');
 
   const onCancel = useCallback(
     (id: string) => {
@@ -28,24 +25,24 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
       const cancelPromise = axios.delete(`/api/listings/${id}`);
       toast
         .promise(cancelPromise, {
-          loading: "Deleting Listing...",
-          success: "Listing Deleted!",
+          loading: 'Deleting Listing...',
+          success: 'Listing Deleted!',
           error: (error: any) => {
-            return error?.response?.data?.error || "An error occurred";
+            return error?.response?.data?.error || 'An error occurred';
           },
         })
         .finally(() => {
-          setDeletingId("");
+          setDeletingId('');
           router.refresh();
         });
     },
-    [router]
+    [router],
   );
 
   return (
     <Container>
       <Heading title="Properties" subtitle="List of your Properties" />
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {listings.map((listing) => (
           <ListingCard
             key={listing.id}
