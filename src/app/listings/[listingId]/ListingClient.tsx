@@ -11,7 +11,7 @@ import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
 import axios from 'axios';
 import { differenceInDays, eachDayOfInterval } from 'date-fns';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Range } from 'react-date-range';
 import toast from 'react-hot-toast';
 
@@ -51,9 +51,14 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [totalPrice, setTotalPrice] = useState(listing?.price);
-
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+
+  const dayCount =
+    dateRange.startDate && dateRange.endDate
+      ? differenceInDays(dateRange.endDate, dateRange.startDate)
+      : 0;
+
+  const totalPrice = dayCount && listing.price ? dayCount * listing.price : listing.price;
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) return loginModal.onOpen();
@@ -65,7 +70,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
-        listingId: listing?.id,
+        listingId: listing.id,
       })
       .then(() => {
         toast.success('Listing Reserved');
@@ -78,23 +83,9 @@ const ListingClient: React.FC<ListingClientProps> = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [currentUser, loginModal, totalPrice, dateRange, listing?.id, router]);
+  }, [currentUser, loginModal, totalPrice, dateRange, listing.id, router]);
 
-  useEffect(() => {
-    if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
-
-      if (dayCount && listing?.price) {
-        setTotalPrice(dayCount * listing?.price);
-      } else {
-        setTotalPrice(listing?.price);
-      }
-    }
-  }, [dateRange, listing?.price]);
-
-  const category = useMemo(() => {
-    return categories.find((item) => item.label === listing?.category);
-  }, [listing?.category]);
+  const category = categories.find((item) => item.label === listing.category);
 
   return (
     <Container>
